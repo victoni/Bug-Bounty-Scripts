@@ -25,3 +25,5 @@ Featured tools:
 * [httprobe](https://github.com/tomnomnom/httprobe)
 * [getallurls](https://github.com/lc/hacks/tree/master/getallurls)
 * [anti-burl](https://github.com/tomnomnom/hacks/tree/master/anti-burl)
+
+P.S. ``curl https://raw.githubusercontent.com/victoni/Bug-Bounty-Scripts/master/penguin``
