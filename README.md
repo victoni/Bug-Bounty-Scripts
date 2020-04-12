@@ -12,7 +12,7 @@ subdom.sh: Subdomain discovery from crts.sh and digicert.com (includes CN.py)
 
 ``Use: bash subdom.sh example.com``
 
-lazy.sh: Combining subfinder, assetfinder, subjack and crobat-client for subdomain discovery, using httprobe to discover responsive domains, feeding them to waybackurls and anti-burl and grabing possible vulnerable SSRF or Open Redirection endpoints. I tried to do an all-in-one thing ```¯\_(ツ)_/¯```
+lazy.sh: Combining subfinder, assetfinder, crobat-client and subbrute for subdomain discovery and subjack for subdomain takeover discovery. It then uses httprobe to discover responsive domains, feeds them to waybackurls and anti-burl and grabing possible vulnerable SSRF or Open Redirection endpoints. I tried to do an all-in-one thing ```¯\_(ツ)_/¯```
 
 ``Use: bash lazy.sh subdomain.com``
 
@@ -25,5 +25,6 @@ Featured tools:
 * [waybackurls](https://github.com/tomnomnom/waybackurls)
 * [anti-burl](https://github.com/tomnomnom/hacks/tree/master/anti-burl)
 * [crobat-client](https://sonar.omnisint.io/)
+* [subbrute](https://github.com/TheRook/subbrute)
 
 P.S. ``curl https://raw.githubusercontent.com/victoni/Bug-Bounty-Scripts/master/penguin``

@@ -3,8 +3,10 @@
 subfinder -d $1 | tee -a domains
 assetfinder -subs-only $1 | tee -a domains
 crobat-client -s $1 | tee -a domains
+/home/victor/Desktop/bugHunting/tools/subbrute/subbrute.py -r /home/victor/Desktop/bugHunting/tools/subbrute/resolvers.txt -o subb.txt -s /home/victor/Desktop/bugHunting/tools/subbrute/names.txt $1
 
 #sorting/uniq
+cat subb.txt >> domains
 sort -u domains | tee -a dom2;rm domains;mv dom2 domains
 
 #account takeover scanning
