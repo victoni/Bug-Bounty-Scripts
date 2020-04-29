@@ -26,5 +26,7 @@ Featured tools:
 * [anti-burl](https://github.com/tomnomnom/hacks/tree/master/anti-burl)
 * [crobat-client](https://sonar.omnisint.io/)
 * [subbrute](https://github.com/TheRook/subbrute)
+* [gf](https://github.com/tomnomnom/gf)
+* [crt.sh](https://crt.sh/)
 
 P.S. ``curl https://raw.githubusercontent.com/victoni/Bug-Bounty-Scripts/master/penguin``
