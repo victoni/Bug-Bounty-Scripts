@@ -12,11 +12,8 @@ echo "[*] Subdomain discovery ended"
 #cat subb.txt >> domains
 sort -u domains > dom2;rm domains;mv dom2 domains
 
-echo "[*] Sorting domains ended"
-
 #account takeover scanning
 subjack -w domains -t 100 -timeout 30 -ssl -c /home/victor/go/src/github.com/haccer/subjack/fingerprints.json -v | tee -a takeover
-
 echo "[*] Subdomain takeover check ended"
 
 #httprobing and endpoint discovery from weybackurls 
@@ -26,8 +23,18 @@ echo "[*] httprobe ended"
 cat responsive | waybackurls | tee -a all_urls
 echo "[*] waybackurls ended"
 
+#extracting all responsive js files
+grep "\.js$" all_urls | anti-burl | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort -u | tee -a javascript_files
+echo "[*] collecting all js files ended"
+
+#analyzing js files for secrets
+mkdir js;cd js;wgetlist ../javascript_files; python3 DumpsterDiver.py -p . | tee -a ../js_secrets; cd ..
+echo "[*] analyzing js files ended"
+
 #grabing endpoints that include parameters which point to internal paths or external endpoints
 gf redirect all_urls | anti-burl > redirects
+echo "[*] greping possible redirects ended"
 
-#cat all_urls | grep "=/" | anti-burl | tee -a internal_path_red
-#cat all_urls | grep "=http" | anti-burl | tee -a external_path_red
+#automating xss
+autoxss domains
+echo "[*] automating xss ended"
