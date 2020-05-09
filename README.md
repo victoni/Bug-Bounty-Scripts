@@ -8,9 +8,9 @@ cors.py: PoC generator for misconfigured CORS
 
 ``Use: python cors.py https://example.com/api``
 
-subdom.sh: Subdomain discovery from crts.sh and digicert.com (includes CN.py)
+jscollector: sinle line bash command to grab all js file endpoints, which later can be downloaded with wgetlist and analyzed
 
-``Use: bash subdom.sh example.com``
+``Use: bash jscollector all_urls``
 
 lazy.sh: Combining subfinder, assetfinder, crobat-client and subbrute for subdomain discovery and subjack for subdomain takeover discovery. It then uses httprobe to discover responsive domains, feeds them to waybackurls and anti-burl and grabing possible vulnerable SSRF or Open Redirection endpoints. I tried to do an all-in-one thing ```¯\_(ツ)_/¯```
 
