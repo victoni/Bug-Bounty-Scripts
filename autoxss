@@ -2,6 +2,6 @@
 # $1 == (sub)domains
 #inspired by https://twitter.com/Enesdex/status/1256350373259993090
 echo "[*] Executing hakrawler"
-cat $1 | hakrawler -depth 3 -plain > tee -a spider
+cat $1 | hakrawler -depth 3 -plain | tee -a spider
 echo "[*] Executing kxss"
 cat hakrawler all_urls | kxss | tee -a autoxss # all_urls == wayback result from lazy.sh

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+grep "\.js$" $1 | anti-burl | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort -u | tee -a javascript_files
