@@ -20,6 +20,8 @@ ids.py: Originally used to find all possible hex values/IDs of a product (writeu
 
 ``Use: python3 ids.py [all possible characters in an ID value] [length of the ID value string]``
 
+googlDorks.md: A list of Google Dorks to use for bug bounty hunting
+
 Featured tools:
 * [httprobe](https://github.com/tomnomnom/httprobe)
 * [waybackurls](https://github.com/tomnomnom/waybackurls)
