@@ -25,7 +25,7 @@ cat responsive | hakrawler --depth 3 --plain | tee -a all_urls
 grep "\.js$" all_urls | anti-burl | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort -u | tee -a javascript_files
 
 #analyzing js files for secrets
-mkdir js;cd js;/home/victor/Desktop/bugHunting/tools/Bug-Bounty-Scripts/wgetlist ../javascript_files; cat * >> GF; gf sec GF > gf_sec; rm GF; > sec; cd ..
+mkdir js;cd js;/home/victor/Desktop/bugHunting/tools/Bug-Bounty-Scripts/wgetlist ../javascript_files
 
 #grabing endpoints that include juicy parameters
 gf redirect all_urls | anti-burl > redirects

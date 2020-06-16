@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+echo "   _ _____       _ _           _   "
+echo "  (_)  __ \     | | |         | |  "
+echo "   _| /  \/ ___ | | | ___  ___| |_ "
+echo "  | | |    / _ \| | |/ _ \/ __| __|"
+echo "  | | \__/\ (_) | | |  __/ (__| |_ "
+echo "  | |\____/\___/|_|_|\___|\___|\__|"
+echo " _/ |                              "
+echo "|__/                               "
+echo
+echo
+echo "[*] Gathering all js urls using gau"
+echo
+
+while read SUB; do
+	gau -subs $SUB | grep "\.js$" | anti-burl | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort -u | tee -a javascript_files
+done < $1
+
+echo
+echo "[*] downloading js files"
+mkdir js;cd js; while read LINE; do curl -s "$LINE" | js-beautify > $( echo "$LINE" | sed -e 's/[/]/_/g' | sed -e 's/:/./g'); done < ../javascript_files
+cd ..
+for file in ./js/*; do
+	echo
+	echo Juicy stuff in $file
+	gf js $file
+	echo
+done

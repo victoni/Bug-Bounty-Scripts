@@ -8,9 +8,9 @@ cors.py: PoC generator for misconfigured CORS
 
 ``Use: python cors.py https://example.com/api``
 
-jscollector: sinle line bash command to grab all js file endpoints, which later can be downloaded with wgetlist and analyzed
+jscollect: Grabs and downloads all js file endpoints found from gau, then uses gf with the pattern js.json
 
-``Use: bash jscollector all_urls``
+``Use: bash jcollect subs.txt``
 
 lazy.sh: Combining subfinder, assetfinder, crobat-client and subbrute for subdomain discovery and subjack for subdomain takeover discovery. It then uses httprobe to discover responsive domains, feeds them to waybackurls and anti-burl and grabing possible vulnerable SSRF or Open Redirection endpoints. I tried to do an all-in-one thing ```¯\_(ツ)_/¯```
 
