@@ -13,6 +13,9 @@ Open Redirections/SSRF:
 Subdomain discovery:
 
 `site:domain.com -site:www.domain.com`
+
 `site:domain.com -inurl:www`
+
 `site:domain.com -www`
+
 `site:*.domain.com`
