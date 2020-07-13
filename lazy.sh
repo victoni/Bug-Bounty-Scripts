@@ -1,10 +1,19 @@
 
 #finding subdomains
+#cat /home/victor/Desktop/bugHunting/resources/wordlists/dns-Jhaddix.txt | subgen -d "$1" | zdns A | jq -r "select(.data.answers[0].name) | .name" | tee -a domains
 subfinder -d $1 | tee -a domains
 assetfinder -subs-only $1 | tee -a domains
 crobat-client -s $1 | tee -a domains
 curl -s "https://crt.sh/\?q\=%25.$1\&output\=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | tee -a domains
-cat /home/victor/Desktop/bugHunting/resources/wordlists/dns-Jhaddix.txt | subgen -d "$1" | zdns A | jq -r "select(.data.answers[0].name) | .name" | tee -a domains
+
+rapiddns(){
+curl -s "https://rapiddns.io/subdomain/$1?full=1" \
+ | grep -oP '_blank">\K[^<]*' \
+ | grep -v http \
+ | sort -u
+}
+
+rapiddns $1 | tee -a domains
 
 #sorting/uniq
 #cat subb.txt >> domains
