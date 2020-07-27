@@ -18,10 +18,12 @@ curl -s "https://rapiddns.io/subdomain/$1?full=1" \
 rapiddns $1 | tee -a domains
 
 
-
 #sorting/uniq
 #cat subb.txt >> domains
 sort -u domains > dom2;rm domains;mv dom2 domains
+
+#screeshots
+python3 /home/victor/Desktop/bugHunting/tools/webscreenshot/webscreenshot.py -i domains -w 10
 
 #account takeover scanning
 subjack -w domains -t 100 -timeout 30 -ssl -c /home/victor/go/src/github.com/haccer/subjack/fingerprints.json -v | tee -a takeover
@@ -37,17 +39,16 @@ cat responsive | hakrawler --depth 3 --plain | tee -a all_urls
 
 #extracting all responsive js files
 grep "\.js$" all_urls | anti-burl | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort -u | tee -a javascript_files
-
-
 while read LINE; do 
-	python3 /home/victor/Desktop/bugHunting/tools/secretfinder/SecretFinder.py -i $LINE -o cli | tee -a js_results
+	python3 /home/victor/Desktop/bugHunting/tools/secretfinder/SecretFinder.py -i $LINE -o cli | tee -a secretfinder_results
 done < javascript_files
 
+#xss scan
+dalfox file all_urls -b "https://vict0ni.xss.ht" -o dalfox_scan
 
 #grabing endpoints that include juicy parameters
 gf redirect all_urls | anti-burl > redirects
 gf idor all_urls | anti-burl > idor
 gf rce all_urls | anti-burl > rce
 gf lfi all_urls | anti-burl > lfi
-gf xss all_urls | anti-burl > xss
 gf ssrf all_urls | anti-burl > ssrf
