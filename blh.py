@@ -1,4 +1,5 @@
 # main part of the code from https://gist.github.com/hackerdem/2872d7f994d192188970408980267e6e
+# $ hakrawler -depth 3 -plain example.com | python3 blh.py -t 40 -o blh_result.txt
 import urllib.request, threading, sys
 import argparse
 from colorama import Fore, Style
