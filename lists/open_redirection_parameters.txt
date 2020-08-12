@@ -38,3 +38,4 @@ rurl=
 target=
 url=
 view=
+turl=
