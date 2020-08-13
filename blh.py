@@ -1,8 +1,10 @@
 # main part of the code from https://gist.github.com/hackerdem/2872d7f994d192188970408980267e6e
 # $ hakrawler -depth 3 -plain example.com | python3 blh.py -t 40 -o blh_result.txt
 import urllib.request, threading, sys
+from concurrent.futures import ThreadPoolExecutor
 import argparse
 from colorama import Fore, Style
+
 
 print(Fore.MAGENTA + '''
     ____  __    __  __
@@ -29,7 +31,7 @@ def test_broken():
 				print(res, end='')
 
 		except Exception as e:
-			res = Fore.YELLOW + str(e) + '\n' + Style.RESET_ALL
+			res = Fore.YELLOW + str(e) + ' -> ' + target + '\n' + Style.RESET_ALL
 			print(res, end='')
 			#print(e)
 			pass
@@ -40,36 +42,23 @@ def test_broken():
 
 		output_links.append(res)
 
-def start(thread_num):
-	print('Starting with {} thread(s)'.format(thread_num))
-	for i in range(thread_num):
-			thread = threading.Thread(target=test_broken())
-			jobs.append(thread)
-	for j in jobs:
-		j.start()
-	for j in jobs:
-		j.join()
-
-jobs = []
 parser = argparse.ArgumentParser()
 parser.add_argument("-o", "--output", action="store", dest="output", help="Saves output to a file")
 parser.add_argument('-t', '--threads', action="store", dest="threads", help="Number of threads to use")
 args = parser.parse_args()
 
-try:
-	if (args.threads is None) or (int(args.threads) == 0):
-		start(10)
-	else:
-		start(int(args.threads))
+threadPool = ThreadPoolExecutor(max_workers=int(args.threads))
 
+try:
+	threadPool.submit(test_broken())
+	threadPool.shutdown(wait=True)
 except Exception as e:
 	print(e)
 	sys.exit()
 finally:
 	if args.output is not None:
-			with open(args.output, 'w') as output_file:
-				for url in output_links:
-					output_file.write("{}".format(url))
-
+		with open(args.output, 'w') as output_file:
+			for url in output_links:
+				output_file.write("{}".format(url))
 
 print('Done')
