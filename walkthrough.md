@@ -1,6 +1,6 @@
 # Walkthrough
 
-### Approaching a target, what to look for,
+### Approaching a target, recon, what to look for
 
 * Subdomain discovery
 	* subfinder
