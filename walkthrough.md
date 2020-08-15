@@ -1,5 +1,9 @@
 # Walkthrough
 
+[![hackmd-github-sync-badge](https://hackmd.io/pVHG_kuXTPyMALLeohbxyA/badge)](https://hackmd.io/pVHG_kuXTPyMALLeohbxyA)
+
+### Approaching a target, what to look for,
+
 * Subdomain discovery
 	* subfinder
 	* assetfinder
