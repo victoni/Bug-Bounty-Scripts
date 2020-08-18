@@ -1,6 +1,6 @@
 # Walkthrough
 
-### Approaching a target, recon, what to look for
+### Approaching a target, recon, what to look for:
 
 * Subdomain discovery
 	* subfinder
@@ -10,6 +10,8 @@
 	* amass
 	* rapiddns
 	* google dorks
+	* shodan
+	* aiodnsbrute
 
 * Screenshots
 	* webscreenshot
@@ -24,11 +26,12 @@
 
 * Manual inspection with Burp 
 	* Identify services, e.g. file uploads/ information update
-	* Send interesting endpoints to the Repeater
+		* Send interesting endpoints to the Repeater
 
 * Vulns
 	* XSS
 		* dalfox
+		* xsshunter
 	* Open Redirection
 	* CSRF
 	* Unrestricted File Upload
@@ -45,6 +48,8 @@
 		* Github
 		* Google dorks
 		* SecretFinder
+		* Shodan
 	* Broken Link Hijacking
+	* JWT bypasses
 
 ###### tags: `bug-bounty`
