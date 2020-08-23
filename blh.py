@@ -24,7 +24,7 @@ def test_broken():
 			req=urllib.request.Request(url=target, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
 			resp=urllib.request.urlopen(req, timeout=5)
 			if resp.status in [400,404,403,408,409,501,502,503]:
-				res = Fore.RED+ "[" + str(resp.status) + "] " + " - " + resp.reason + " => " + target + Style.RESET_ALL
+				res = Fore.RED+ "[" + str(resp.status) + "] " + " - " + resp.reason + " => " + target + " [VULN]" +Style.RESET_ALL
 				print(res, end='')
 			else:
 				res = Fore.GREEN + "[" + str(resp.status) + "] " + target + Style.RESET_ALL

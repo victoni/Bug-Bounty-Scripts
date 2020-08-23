@@ -6,7 +6,10 @@
 subfinder -d $1 | tee -a domains
 assetfinder -subs-only $1 | tee -a domains
 crobat-client -s $1 | tee -a domains
-curl -s "https://crt.sh/\?q\=%25.$1\&output\=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | tee -a domains
+curl -s "https://crt.sh/?q=%25.$1&output=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | tee -a domains
+amass enum -norecursive -noalts -d $1 | tee -a domains
+aiodnsbrute -w /home/victor/Desktop/bugHunting/resources/wordlists/all.txt -f aiodnsbrute_outp -o json $1
+jq -r '.[].domain' aiodnsbrute_outp | tee -a domains; rm aiodnsbrute_outp
 
 rapiddns(){
 curl -s "https://rapiddns.io/subdomain/$1?full=1" \
@@ -34,7 +37,7 @@ gf interestingsubs responsive > interestingsubs
 
 #endpoint discovery
 cat responsive | gau -subs | tee -a all_urls
-cat responsive | hakrawler --depth 3 --plain | tee -a all_urls
+cat responsive | hakrawler --depth 3 --plain | tee -a all_urls | python3 /home/victor/Desktop/bugHunting/tools/Bug-Bounty-Scripts/blh.py -t 40 -o blh_results
 
 
 #extracting all responsive js files
