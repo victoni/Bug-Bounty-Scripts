@@ -50,8 +50,8 @@
 		* No token
 		* Parameter pollution
 	* Unrestricted File Upload
-		* Magic Bytes
-		* Extention
+		* Magic bytes
+		* File extention
 		* Content-type
 	* IDOR
 		* uid
@@ -74,11 +74,13 @@
 	* CVE
 		* Recon
 		* Shodan
+	* Subdomain Takeover
+		* subjack
 	* Broken Link Hijacking
 		* Social media accounts
 		* Third party links
 	* JWT bypasses
-		* "none" alg
+		* "none" algorithm
 		* "kids" parameter
 		* No/False signature
 	* CORS misconfiguration
