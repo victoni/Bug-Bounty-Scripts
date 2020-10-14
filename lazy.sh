@@ -8,7 +8,7 @@ assetfinder -subs-only $1 | tee -a domains
 crobat-client -s $1 | tee -a domains
 curl -s "https://crt.sh/?q=%25.$1&output=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | tee -a domains
 amass enum -norecursive -noalts -d $1 | tee -a domains
-aiodnsbrute -w /home/victor/Desktop/bugHunting/resources/wordlists/all.txt -f aiodnsbrute_outp -o json $1
+aiodnsbrute -w /home/victor/Desktop/bugHunting/resources/wordlists/subdomains/bitquark-subdomains-top100000.txt -f aiodnsbrute_outp -o json $1
 jq -r '.[].domain' aiodnsbrute_outp | tee -a domains; rm aiodnsbrute_outp
 
 rapiddns(){
@@ -23,7 +23,7 @@ rapiddns $1 | tee -a domains
 
 #sorting/uniq
 #cat subb.txt >> domains
-sort -u domains > dom2;rm domains;mv dom2 domains
+sort -u domains >> dom2;rm domains;mv dom2 domains
 
 #screeshots
 python3 /home/victor/Desktop/bugHunting/tools/webscreenshot/webscreenshot.py -i domains -w 10
@@ -33,11 +33,11 @@ subjack -w domains -t 100 -timeout 30 -ssl -c /home/victor/go/src/github.com/hac
 
 #httprobing 
 cat domains | httprobe | tee -a responsive
-gf interestingsubs responsive > interestingsubs
+gf interestingsubs responsive >> interestingsubs
 
 #endpoint discovery
 cat responsive | gau -subs | tee -a all_urls
-cat responsive | hakrawler --depth 3 --plain | tee -a all_urls | python3 /home/victor/Desktop/bugHunting/tools/Bug-Bounty-Scripts/blh.py -t 40 -o blh_results
+cat responsive | hakrawler --depth 3 --plain | tee -a all_urls #python3 /home/victor/Desktop/bugHunting/tools/Bug-Bounty-Scripts/blh.py -t 40 -o blh_results
 
 
 #extracting all responsive js files
@@ -47,11 +47,12 @@ while read LINE; do
 done < javascript_files
 
 #xss scan
-dalfox file all_urls -b "https://vict0ni.xss.ht" -o dalfox_scan
+gf xss all_urls >> xss
+dalfox file xss -o dalfox_scan
 
 #grabing endpoints that include juicy parameters
-gf redirect all_urls | anti-burl > redirects
-gf idor all_urls | anti-burl > idor
-gf rce all_urls | anti-burl > rce
-gf lfi all_urls | anti-burl > lfi
-gf ssrf all_urls | anti-burl > ssrf
+gf redirect all_urls | anti-burl >> redirects
+gf idor all_urls | anti-burl >> idor
+gf rce all_urls | anti-burl >> rce
+gf lfi all_urls | anti-burl >> lfi
+gf ssrf all_urls | anti-burl >> ssrf
