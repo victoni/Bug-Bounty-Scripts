@@ -19,3 +19,7 @@ Subdomain discovery:
 `site:domain.com -www`
 
 `site:*.domain.com`
+
+Information Disclosure:
+
+`site:*.domain.com ext:ppt intext:password`, where ext and intext can be changed to other extensions and PII, respectively.

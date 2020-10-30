@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# extract javascript files from gau and parse them through SercetFinder
+# ./jcollect domains.txt
+
 while read SUB; do
 	gau -subs $SUB | grep "\.js$" | anti-burl | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort -u | tee -a javascript_files
 done < $1

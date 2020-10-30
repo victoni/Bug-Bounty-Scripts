@@ -1,4 +1,12 @@
-#finding subdomains
+# 1. Finding subdomains using a bunch of tools
+# 2. Taking screenshots
+# 3. Checking for subdomain takeover
+# 4. Probing for http
+# 5. Passive and active endpoint discovery
+# 6. jcollect
+# 7. gf grabbing
+
+# ./lazy.sh domain.tld
 
 #cat /home/victor/Desktop/bugHunting/resources/wordlists/dns-Jhaddix.txt | subgen -d "$1" | zdns A | jq -r "select(.data.answers[0].name) | .name" | tee -a domains
 # amass enum -v -src -ip -brute -min-for-recursive 2 -d $1

@@ -1,3 +1,5 @@
+# produce IDs based on the possible characters that can come up
+# e.g. for UID: python3 ids.py abcdefghijklmnopqrstuvwxyz1234567890
 import itertools
 from sys import argv
 

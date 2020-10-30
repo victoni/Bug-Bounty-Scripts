@@ -1,5 +1,6 @@
 # CORS Misconfiguration PoC generator
 # Html code from https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CORS%20Misconfiguration
+#python3 cors.py https://api.example.com
 
 from sys import argv
 

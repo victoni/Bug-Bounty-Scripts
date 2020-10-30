@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
+# download a bunch of files from a list (mostly used for js files)
+# ./wgetlist jsFiles.txt
 while read LINE; do wget $LINE; done < $1
