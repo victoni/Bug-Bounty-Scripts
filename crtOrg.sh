@@ -1,0 +1,1 @@
+curl -s "https://crt.sh/?O=$(echo $@ | sed -e 's/\ /+/g')\&output=json" | jq -r .[].common_name | grep -v null | grep -v " " | sort -u
