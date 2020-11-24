@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# iterates over a file of domains to use gau on more than one domain (basically a for loop of a file)
+# gau [gau's options] ... [gau's options] domains.txt
+for D in $(cat ${@: -1}); gau ${@:2} $D; done
