@@ -43,16 +43,14 @@ end
 -- ACTION --
 action = function(host, port)
 			
-			-- build the ffuf command
+			--== build the ffuf command ==--
 
 			-- http or https
 			local protocol = get_ssl(port)
 
 			-- arguments: extention, filename
 			local ext = stdnse.get_script_args('e') or stdnse.get_script_args(SCRIPT_NAME .. '.e')
-
 			local fileName = (host.targetname or host.ip) .. "_" .. port.number .. '.' .. ext
-
 			local command = string.format('ffuf -u "' .. protocol .. '://%s:' .. port.number .. '/FUZZ" -w /home/op/lists/vic-manual.txt -of ' .. ext .. ' -o ' .. fileName, host.targetname or host.ip)		
 			
 			-- if wordlist is set
